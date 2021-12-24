@@ -1,0 +1,40 @@
+<!--  
+    Here is the main file of this project's front-end, 
+    <head> defines:
+            -meta : how text is transmitted and stored (here we use UTF-8 https://en.wikipedia.org/wiki/UTF-8 )    
+            -title
+            -css's style with <link>
+            -scripts used
+    <body> is what appears to the user
+--->
+
+
+
+<!DOCTYPE html>
+<!-- lang(language) = english, dir (direction) = Left To Right, (it could be rtl (Right to left))-->
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Memory</title>
+    <link rel="stylesheet" href="style.css"></link>
+    <!--defining the type and the path to our js main file, where are functions linked to this page-->
+    <script type="text/javascript" src="index.js"></script>
+    <!--using ajax for handling events and modifications of DOM (Document Object Model https://en.wikipedia.org/wiki/Document_Object_Model )
+    in this example it will allow us to store the user name when we will switch to the next page (game.html)-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <!-- container is mainly a css purpose, containers helps to avoid repetitions (you can call it otherwise) -->
+    <div class="container">
+    <!-- this form is what will be sent do html, 
+        action defines where to send the form data,
+        method is what we do: GET or POST, do i receive data or do i send it
+    -->
+        <form action="memory.html" method="POST">
+        </form>
+    </div>
+
+</body>
+</html>
