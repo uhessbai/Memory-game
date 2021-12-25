@@ -6,7 +6,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // function called by the input type on the form 
-    function handleSubmit () {
+    function savePseudo () {
     
         // submit pseudo inside of textbox
         const name = document.getElementById('name').value;  
