@@ -200,6 +200,31 @@ document.addEventListener('DOMContentLoaded', () => {
     function save_score() {
         // stopping chrono 
         clearInterval(tempo)
+        alert('Congratulations ! ')
+        // preparing informations that are going to be saved
+        usr_data = {
+          pseudo: usr_pseudo,
+          tries: usr_tries,
+          chrono: seconds,
+        };
+        // sending data to backend
+        $.ajax({
+          type: "POST",
+          url: "http://127.0.0.1:8080/setscores",
+          dataType: 'json',
+          contentType: "application/json",
+          // converting datas to JSON format as we mentionned in dataType that it would be that way
+          data: JSON.stringify(usr_data),
+          success: function (data) {
+            console.log('Success: ')
+            console.dir(data)
+          },
+          error: function (data, status, error) {
+              console.log('Error: ' + error.message);
+              console.log(error)
+          },
+        });
+  
     }
 
     function chrono_loop() {
