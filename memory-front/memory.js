@@ -169,7 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
         cardsValues = []
         // we have 16 cards, 8 pairs so score will be full when score will be equal to 8 
         if (usr_score === 8) {
-          alert('Congratulations ! ')
           save_score()
         }
     }
