@@ -26,6 +26,8 @@
 </head>
 
 <body>
+    <img src="assets/verso.png" >
+
     <!-- container is mainly a css purpose, containers helps to avoid repetitions (you can call it otherwise) -->
     <div class="container">
     <!-- this form is what will be sent do html, 
@@ -36,8 +38,21 @@
             <!--Placeholder for the username-->
             <input type="text" id="name" placeholder="Name">
             <!-- Button for validating the username, type "submit" is linked to the form, onclick will call the linked function-->
-            <input type="submit" class="buttonvalidate" onclick="savePseudo()"/>
+            <input type="submit" class="buttonvalidate" onclick="saveOptions()"/>
+            <p>Select your difficulty</p>
+
+            <!--Radio type is close from a checkbox except it allows to get only one box checked-->
+            <div>
+                <input type="radio" id="diff16" name="difficulty" value="16"
+                       checked>
+                <label for="diff16">16 blocks</label>
+              </div>
+            <div>
+                <input type="radio" id="diff32" name="difficulty" value="32">
+                <label for="diff32">32 blocks</label>
+            </div>
         </form>
+        
         <!-- displaying scores of users-->
         <div id="scoreList">
 

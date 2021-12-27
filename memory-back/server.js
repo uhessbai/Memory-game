@@ -22,10 +22,10 @@ var score_board = {
 
 const scoreHandler = {
     // this will be the obj containing data that we will pushed in a json object 
-   // (psd = pseudo, tmr = timer)
+   // (psd = pseudo, tmr = timer, trs = tries, diff = difficulty)
 
-    save_score: function writeScoreFile(psd, tmr, res) {
-        score_board.usr.push({pseudo: psd, timer: tmr});
+    save_score: function writeScoreFile(psd, tmr, trs, diff, res) {
+        score_board.usr.push({pseudo: psd, timer: tmr, tries: trs});
         console.log(score_board.usr);
         var data = JSON.stringify(score);
         fs.writeFileSync(score_path, data, {'flags': 'wx'}, (err) => {
@@ -69,7 +69,7 @@ const scoreHandler = {
         return parsed;
     },
 
-    // att launch we save previous scores stored in scores.json in a object so that in next push
+    // at launch we save previous scores stored in scores.json in a object so that in next push
     // scores wont be erased
 
     init_server: function initServer() {
@@ -79,7 +79,7 @@ const scoreHandler = {
         });
         for (const key in ord_score[0]) {
             console.log(ord_score[0][key]);
-            score_board.usr.push({pseudo: ord_score[0][key].pseudo, timer: ord_score[0][key].timer});
+            score_board.usr.push({pseudo: ord_score[0][key].pseudo, timer: ord_score[0][key].timer, tries: ord_score[0][key].tries});
         }
     },
 }
@@ -100,7 +100,10 @@ app.post("/setscores", function (req, res) {
     
     var usr_pseudo = req.body.pseudo;
     var usr_timer = req.body.chrono;
-    scoreHandler.save_score(usr_pseudo, usr_timer, function(error) {
+    var usr_tries = req.body.tries;
+    var difficulty = req.body.difficulty;
+
+    scoreHandler.save_score(usr_pseudo, usr_timer, usr_tries, difficulty, function(error) {
     });
 });
 

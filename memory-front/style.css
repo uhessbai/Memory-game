@@ -1,11 +1,88 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+
+  }
+
+.card {
+  padding: 10px;
+}
+
 .grid {
-    display:grid;
-    grid-template-columns: repeat(4, 1fr);
+  display:grid;
+  grid-template-columns: repeat(6, 1fr);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  grid-auto-rows: 2OOpx;
+
+}
+
+.progressbar { 
+  background-color: rgb(192, 192, 192); 
+  width: 80%; 
+      border-radius: 15px; 
+} 
+
+
+.container {
+
+    display:block;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    grid-auto-rows: 2OOpx;
-  
+    
+}
+
+.intro {
+  padding: 10px;
+  border-style: solid;
+  border-color: coral;
+
+}
+
+.buttonvldt {
+    background-color: #3CBC8D; /* Green */
+    border: none;
+    color: #fff;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
   }
+.buttonvldt:hover {
+    background-color: #fff; /* Green */
+    color: black;
+    border-color: #3CBC8D;
+    border-style: solid;
+
+  }
+  
+.pseudo {
+    border: 2px solid #3CBC8D;
+    border-radius: 4px;
+  
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+
+input[type=text]:focus {
+    border: px solid #fff;
+  }
+  
+
+.box {
+    padding: 10px;
+}
