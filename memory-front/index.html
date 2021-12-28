@@ -42,14 +42,15 @@
             <p>Select your difficulty</p>
 
             <!--Radio type is close from a checkbox except it allows to get only one box checked
-            one is already checked so we wont have any error if submit is sent-->
+            one is already checked so we wont have any error if submit is sent, switchscore will handle the score displayed depending
+            on difficulty -->
             <div>
-                <input type="radio" id="diff18" name="difficulty" value="18"
+                <input type="radio" id="diff18" name="difficulty" value="18" onclick="switchScore(18)"
                        checked>
                 <label for="diff18">18 blocks</label>
               </div>
             <div>
-                <input type="radio" id="diff36" name="difficulty" value="36">
+                <input type="radio" id="diff36" name="difficulty" value="36" onclick="switchScore(36)" >
                 <label for="diff36">36 blocks</label>
             </div>
             <!-- will display  scoreList-->

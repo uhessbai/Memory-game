@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+// score_tab will contain scores from difficulty 18 (score_tab[0]) and 36 (score_tab[1]) 
+scores_tab = []
+
+
 function displayScores() {
         // Get function to display scores on main menu, 
         $.ajax ({
@@ -17,20 +21,39 @@ function displayScores() {
             success: function(res) {    
                 // send user's scores to div with id "scorelist"
                 var mainContainer = document.getElementById("scoreList");
-                console.log("displaying score")
-                console.log(res[0])
-                for (var key in res[0]) {
-                    console.log("ooooo")
-                    var div = document.createElement("div");
-                    div.innerHTML = (res[0][key].pseudo) + ' :' +  res[0][key].timer  + ' s';
-                    mainContainer.appendChild(div);
-                }
+                console.log("displaying score");
+                console.log(res[0]);
+                scores_tab = res;
+                // inserting res[0] because difficulty 18 is the default's one selected
+                insert_score_div(res[0], mainContainer);
             },
             error: function(error){
-                console.log("Getting score issue")
-                console.log(error)
+                console.log("Getting score issue");
+                console.log(error);
             }
         })
+}
+
+// for each user score, we add a div child element in element scorelist
+function insert_score_div (res, mainContainer) {
+    for (var key in res) {
+        var div = document.createElement("div");
+        div.innerHTML = (res[key].pseudo) + ' :' +  res[key].timer  + ' s';
+        mainContainer.appendChild(div);
+    }
+}
+
+function switchScore(diff) {
+    var mainContainer = document.getElementById("scoreList");
+    // removing scorelist child elements
+    mainContainer.innerHTML =  '';
+    if (diff == 18) {
+        to_display = scores_tab[0];
+    }
+    else {
+        to_display = scores_tab[1];
+    }
+    insert_score_div(to_display, mainContainer);
     
 }
 
