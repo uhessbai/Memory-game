@@ -22,9 +22,9 @@ body {
 }
 
 .progressbar { 
-  background-color: rgb(192, 192, 192); 
-  width: 80%; 
-      border-radius: 15px; 
+  width: 5rem;
+  margin-top: 2rem;
+  margin-left: 1rem;
 } 
 
 
@@ -39,10 +39,10 @@ body {
     
 }
 
-.intro {
+.hometitle {
   padding: 10px;
   border-style: solid;
-  border-color: coral;
+  border-color: #3CBC8D;
 
 }
 
@@ -65,11 +65,11 @@ body {
 
   }
   
-.pseudo {
-    border: 2px solid #3CBC8D;
-    border-radius: 4px;
-  
+.infos {
+  margin-top: 2rem;
+  margin-left: 1rem;  
 }
+
 
 input[type=text] {
     width: 100%;
@@ -85,4 +85,23 @@ input[type=text]:focus {
 
 .box {
     padding: 10px;
+}
+
+.ranking {
+  padding-top: 5rem;
+}
+
+.titleranking {
+  font-weight: bold;
+}
+
+input[type="radio"] {
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 50%;
 }

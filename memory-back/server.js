@@ -31,6 +31,8 @@ const scoreHandler = {
     // this will be the obj containing data that we will pushed in a json object 
    // (psd = pseudo, tmr = timer, trs = tries, diff = difficulty)
 
+
+    // adding score to score_board depending on difficulty
     save_score: function writeScoreFile(psd, tmr, trs, diff, res) {
         var path = ""
         if (diff == 18) {
@@ -48,6 +50,7 @@ const scoreHandler = {
             console.log("difficulty 36")
             console.log(score_board_36.usr);
         }
+        // saving score in appropriate score file
         var data = JSON.stringify(score_re);
         console.log("var data : ")
         console.log(data)
@@ -64,6 +67,7 @@ const scoreHandler = {
 
     read_score: function readScoreFile(score_path, res) {
         console.log("reading score")
+        // calling module fs for checking if file exists, if so, read it, then we convert value to json format
         if (fs.existsSync(score_path)) {
             var data = fs.readFileSync(score_path);
             if (data) {
@@ -86,7 +90,7 @@ const scoreHandler = {
     init_server: function initServer() {
         score_18 = scoreHandler.read_score(score_18_path);
         score_36 = scoreHandler.read_score(score_36_path);
-
+        // putting score in score_boards
         const ord_score_18 = Object.keys(score_18).map(function (key) {
             return score_18[key];
         });
@@ -121,10 +125,6 @@ app.get("/getscores", (req, res) => {
      // gathering scores
    // var score = []
     var ordened_score = []
-    // score[0] = scoreHandler.read_score(res);
-    // score[1] = scoreHandler.read_score(res);
-    // console.log(score[0]);
-    // console.log(score[1]);
     ordened_score[0] = scoreHandler.order_score(score_board_18);
     ordened_score[1] = scoreHandler.order_score(score_board_36);
 

@@ -85,107 +85,105 @@ document.addEventListener('DOMContentLoaded', () => {
               cardval: 8
             },
             {
-                name: 'img9',
-                img: 'assets/img9.png',
-                cardval: 9
-              },
-              {
-                name: '2img9',
-                img: 'assets/img9.png',
-                cardval: 9
-              },
-              {
-                name: 'img10',
-                img: 'assets/img10.png',
-                cardval: 10
-              },
-              {
-                name: '2img10',
-                img: 'assets/img10.png',
-                cardval: 10
-              },
-              {
-                name: 'img11',
-                img: 'assets/img11.png',
-                cardval: 11
-              },
-              {
-                name: '2img11',
-                img: 'assets/img11.png',
-                cardval: 11
-              },
-              {
-                name: 'img12',
-                img: 'assets/img12.png',
-                cardval: 12
-              },
-              {
-                name: '2img12',
-                img: 'assets/img12.png',
-                cardval: 12
-              },
-              {
-                name: 'img13',
-                img: 'assets/img13.png',
-                cardval: 13
-              },
-              {
-                name: '2img13',
-                img: 'assets/img13.png',
-                cardval: 13
-              },
-              {
-                name: 'img14',
-                img: 'assets/img14.png',
-                cardval: 14
-              },
-              {
-                name: '2img14',
-                img: 'assets/img14.png',
-                cardval: 14
-              },
-              {
-                name: 'img15',
-                img: 'assets/img15.png',
-                cardval: 15
-              },
-              {
-                name: '2img15',
-                img: 'assets/img15.png',
-                cardval: 15
-              },
-              {
-                name: 'img16',
-                img: 'assets/img16.png',
-                cardval: 16
-              },
-              {
-                name: '2img16',
-                img: 'assets/img16.png',
-                cardval: 16
-              },
-              {
-                name: 'img17',
-                img: 'assets/img17.png',
-                cardval: 17
-              },
-              {
-                name: '2img17',
-                img: 'assets/img17.png',
-                cardval: 17
-              },
-              {
-                name: 'img18',
-                img: 'assets/img18.png',
-                cardval: 18
-              },
-              {
-                name: '2img18',
-                img: 'assets/img18.png',
-                cardval: 18
-              },
-
-
+              name: 'img9',
+              img: 'assets/img9.png',
+              cardval: 9
+            },
+            {
+              name: '2img9',
+              img: 'assets/img9.png',
+              cardval: 9
+            },
+            {
+              name: 'img10',
+              img: 'assets/img10.png',
+              cardval: 10
+            },
+            {
+              name: '2img10',
+              img: 'assets/img10.png',
+              cardval: 10
+            },
+            {
+              name: 'img11',
+              img: 'assets/img11.png',
+              cardval: 11
+            },
+            {
+              name: '2img11',
+              img: 'assets/img11.png',
+              cardval: 11
+            },
+            {
+              name: 'img12',
+              img: 'assets/img12.png',
+              cardval: 12
+            },
+            {
+              name: '2img12',
+              img: 'assets/img12.png',
+              cardval: 12
+            },
+            {
+              name: 'img13',
+              img: 'assets/img13.png',
+              cardval: 13
+            },
+            {
+              name: '2img13',
+              img: 'assets/img13.png',
+              cardval: 13
+            },
+            {
+              name: 'img14',
+              img: 'assets/img14.png',
+              cardval: 14
+            },
+            {
+              name: '2img14',
+              img: 'assets/img14.png',
+              cardval: 14
+            },
+            {
+              name: 'img15',
+              img: 'assets/img15.png',
+              cardval: 15
+            },
+            {
+              name: '2img15',
+              img: 'assets/img15.png',
+              cardval: 15
+            },
+            {
+              name: 'img16',
+              img: 'assets/img16.png',
+              cardval: 16
+            },
+            {
+              name: '2img16',
+              img: 'assets/img16.png',
+              cardval: 16
+            },
+            {
+              name: 'img17',
+              img: 'assets/img17.png',
+              cardval: 17
+            },
+            {
+              name: '2img17',
+              img: 'assets/img17.png',
+              cardval: 17
+            },
+            {
+              name: 'img18',
+              img: 'assets/img18.png',
+              cardval: 18
+            },
+            {
+              name: '2img18',
+              img: 'assets/img18.png',
+              cardval: 18
+            },
           ]
 
     // cardsPicked and cardsValues will handle the state of cardspicked between functions, both will be an array of 2 values (card1 = [0] and card2 = [1])
@@ -276,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(card2)
         // if there is a pair, score ++ , else cards are fliped back
         if (card1 === card2 ) {
-          addingScore(idCard1, idCard2, cards)
+          addingScore(idCard1, idCard2, cards)          
         }
         else {
           setBackCards(idCard1, idCard2, cards)
@@ -285,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cardsPicked = []
         cardsValues = []
         // we have 18 or 36 cards, 9 or 18 pairs, so score will be full when score will be equal to the amount of cards divided by 2
-        if (usr_score === (1)) {
+        if (usr_score === ((difficulty / 2) - 1) ) {
           save_score()
         }
     }
@@ -295,7 +293,9 @@ document.addEventListener('DOMContentLoaded', () => {
         cards[parseInt(idCard2)].setAttribute('src', 'assets/cardgg.png')
         // dating and displaying score
         usr_score += 1
-    
+        // actualizing progressbar by calculating percentage and inserting it  
+        document.getElementById('progressbar').setAttribute('value', (Math.floor((usr_score / (difficulty / 2)) * 100)));
+        // actualizing score 
         document.getElementById("score").innerHTML = ("Score : " +  usr_score)
     }
     
@@ -333,12 +333,12 @@ document.addEventListener('DOMContentLoaded', () => {
           // converting datas to JSON format as we mentionned in dataType that it would be that way
           data: JSON.stringify(usr_data),
           success: function (data) {
-            console.log('Success: ')
-            console.dir(data)
+            console.log('Success: ');
+            console.dir(data);
           },
           error: function (data, status, error) {
               console.log('Error: ' + error.message);
-              console.log(error)
+              console.log(error);
           },
         });
   

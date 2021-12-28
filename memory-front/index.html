@@ -34,11 +34,12 @@
         action defines where to send the form data,
         method is what we do: GET or POST, do i receive data or do i send it
     -->
+        <h2 class="hometitle">Memory Game</h2>
         <form action="memory-game.html" method="POST">
             <!--Placeholder for the username, required handle potential issues for a void name-->
             <input type="text" id="name" placeholder="Name" required>
             <!-- Button for validating the username, type "submit" is linked to the form, onclick will call the linked function-->
-            <input type="submit" class="buttonvalidate" onclick="saveOptions()" value="Go!"/>
+            <input type="submit" class="buttonvldt" onclick="saveOptions()" value="Go!"/>
             <p>Select your difficulty</p>
 
             <!--Radio type is close from a checkbox except it allows to get only one box checked
@@ -53,13 +54,14 @@
                 <input type="radio" id="diff36" name="difficulty" value="36" onclick="switchScore(36)" >
                 <label for="diff36">36 blocks</label>
             </div>
-            <!-- will display  scoreList-->
-            <div id="scoreList">
 
         </form>
         
         <!-- displaying scores of users-->
-        <div id="scoreList">
+        <div class="ranking">
+            <div class="titleranking">Top ranking</div>
+            <div id="scoreList" >
+        </div>
 
     </div>
 
