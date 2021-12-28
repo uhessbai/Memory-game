@@ -27,10 +27,6 @@ var score_board_36 = {
     usr: [],
 }
 
-var score_board = {
-    usr: [],
-};
-
 const scoreHandler = {
     // this will be the obj containing data that we will pushed in a json object 
    // (psd = pseudo, tmr = timer, trs = tries, diff = difficulty)
@@ -67,10 +63,11 @@ const scoreHandler = {
     },
 
     read_score: function readScoreFile(score_path, res) {
+        console.log("reading score")
         if (fs.existsSync(score_path)) {
             var data = fs.readFileSync(score_path);
             if (data) {
-                var re_score = JSON.parse(data);
+                var re_score = JSON.parse(data);    
                 return re_score
             }
       }
@@ -82,19 +79,6 @@ const scoreHandler = {
         res.end(JSON.stringify(score));
     },
 
-    // as function says we will order user's scores
-    order_score: function orderScore(score) {
-        const ord_score = Object.keys(score).map(function (key) {
-            console.log(score[key]);
-            return score[key];
-        });
-        console.log(ord_score)
-        var parsed = [];
-        var parsed = ord_score[0].sort((a, b) => {
-            return a.timer - b.timer;
-        });
-        return parsed;
-    },
 
     // at launch we save previous scores stored in scores.json in a object so that in next push
     // scores wont be erased
@@ -109,25 +93,44 @@ const scoreHandler = {
         const ord_score_36 = Object.keys(score_36).map(function (key) {
             return score_36[key];
         });
-        scoreHandler.order_score(ord_score_18, score_board_18);
-        scoreHandler.order_score(ord_score_36, score_board_36);
+        for (const key in ord_score_18[0]) {
+            score_board_18.usr.push({pseudo: ord_score_18[0][key].pseudo, timer: ord_score_18[0][key].timer, tries: ord_score_18[0][key].tries});
+        }
+        for (const key in ord_score_36[0]) {
+            score_board_36.usr.push({pseudo: ord_score_36[0][key].pseudo, timer: ord_score_36[0][key].timer, tries: ord_score_36[0][key].tries});
+        }
     },
 
-    order_score: function orderScore(ord_score, score_board) {
-        for (const key in ord_score[0]) {
-            score_board.usr.push({pseudo: ord_score[0][key].pseudo, timer: ord_score[0][key].timer, tries: ord_score[0][key].tries});
-        }
-    }
+
+    order_score: function orderScore(score) {
+        const ord_score = Object.keys(score).map(function (key) {
+            console.log(score[key]);
+            return score[key];
+        });
+        var parsed = [];
+        var parsed = ord_score[0].sort((a, b) => {
+            return a.timer - b.timer;
+        });
+        return parsed;
+    },
 }
 
 scoreHandler.init_server();
 
 app.get("/getscores", (req, res) => {
      // gathering scores
-    var score = scoreHandler.read_score(res);
-    ordened_score = scoreHandler.order_score(score);
-    console.log(ordened_score);
-    scoreHandler.send_to_client(res, score);
+   // var score = []
+    var ordened_score = []
+    // score[0] = scoreHandler.read_score(res);
+    // score[1] = scoreHandler.read_score(res);
+    // console.log(score[0]);
+    // console.log(score[1]);
+    ordened_score[0] = scoreHandler.order_score(score_board_18);
+    ordened_score[1] = scoreHandler.order_score(score_board_36);
+
+    console.log(ordened_score[0]);
+    console.log(ordened_score[1]);
+    scoreHandler.send_to_client(res, ordened_score);
 });
 
 app.post("/setscores", function (req, res) {

@@ -35,8 +35,8 @@
         method is what we do: GET or POST, do i receive data or do i send it
     -->
         <form action="memory-game.html" method="POST">
-            <!--Placeholder for the username-->
-            <input type="text" id="name" placeholder="Name">
+            <!--Placeholder for the username, required handle potential issues for a void name-->
+            <input type="text" id="name" placeholder="Name" required>
             <!-- Button for validating the username, type "submit" is linked to the form, onclick will call the linked function-->
             <input type="submit" class="buttonvalidate" onclick="saveOptions()" value="Go!"/>
             <p>Select your difficulty</p>

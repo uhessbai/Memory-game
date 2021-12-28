@@ -4,9 +4,36 @@
     -one for displaying scores
 */
 document.addEventListener('DOMContentLoaded', () => {
+    displayScores()
 
 });
+
+function displayScores() {
+        // Get function to display scores on main menu, 
+        $.ajax ({
+            url: "http://0.0.0.0:8080/getscores",
+            type: 'GET',
+            contentType: 'json',
+            success: function(res) {    
+                // send user's scores to div with id "scorelist"
+                var mainContainer = document.getElementById("scoreList");
+                console.log("displaying score")
+                console.log(res[0])
+                for (var key in res[0]) {
+                    console.log("ooooo")
+                    var div = document.createElement("div");
+                    div.innerHTML = (res[0][key].pseudo) + ' :' +  res[0][key].timer  + ' s';
+                    mainContainer.appendChild(div);
+                }
+            },
+            error: function(error){
+                console.log("Getting score issue")
+                console.log(error)
+            }
+        })
     
+}
+
 // function called by the input type on the form 
 function saveOptions () {
 
@@ -24,9 +51,4 @@ function saveOptions () {
     // store difficulty for the session
     sessionStorage.setItem("DIFFICULTY", difficulty);
     return;
-}
-
-
-function displayScores() {
-    
 }
