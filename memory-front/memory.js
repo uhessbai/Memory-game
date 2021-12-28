@@ -164,23 +164,57 @@ document.addEventListener('DOMContentLoaded', () => {
                 img: 'assets/img16.png',
                 cardval: 16
               },
+              {
+                name: 'img17',
+                img: 'assets/img17.png',
+                cardval: 17
+              },
+              {
+                name: '2img17',
+                img: 'assets/img17.png',
+                cardval: 17
+              },
+              {
+                name: 'img18',
+                img: 'assets/img18.png',
+                cardval: 18
+              },
+              {
+                name: '2img18',
+                img: 'assets/img18.png',
+                cardval: 18
+              },
+
+
           ]
 
     // cardsPicked and cardsValues will handle the state of cardspicked between functions, both will be an array of 2 values (card1 = [0] and card2 = [1])
     let cardsPicked = []
     let cardsValues = []
     let usr_score = 0
+   
     // will represent the amount of time the player tried to find a pair
     let usr_tries = 0
-    // getting name stored in sessionstorage
+   
+    // getting name stored in sessionstorage and displaying it on page
     const usr_pseudo = sessionStorage.getItem('NAME');
+    document.getElementById('username').innerHTML = usr_pseudo;
+
     // getting difficulty stored in sessionstorage
     const difficulty = sessionStorage.getItem('DIFFICULTY')
-    document.getElementById('username').innerHTML = usr_pseudo;
+    
+    // putting the amount of cards on the deck depending on difficulty
+    deckArray = []
+    for (var i = 0; i < difficulty; i++) {
+      deckArray.push(cardArray[i])
+    }
+
     // shuffle cards, sort will try to compare each cards which has been given a value of 0.5 to a random number between 0 and 1
-    cardArray.sort(() => 0.5 - Math.random())
+    deckArray.sort(() => 0.5 - Math.random())
+    
     // access to the grid where cards will appear 
     const grid = document.querySelector('.grid')
+    
     // chrono variable
     var seconds = 0
     var tempo = []
@@ -201,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // used for score
           card.setAttribute('cardId', i)
           // trigger flipping card
-          card.setAttribute('cardval', cardArray[i].cardval)
+          card.setAttribute('cardval', deckArray[i].cardval)
           card.addEventListener('click', flipCard)
           // add card to the grid
           grid.appendChild(card)
@@ -218,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cardsPicked.push(cardId)
         cardsValues.push(cardVal)
 
-        this.setAttribute('src', cardArray[cardId].img)
+        this.setAttribute('src', deckArray[cardId].img)
         // avoiding double click on the same card
         this.removeEventListener('click', flipCard)
 
@@ -250,8 +284,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // we checked cards, so we reset state
         cardsPicked = []
         cardsValues = []
-        // we have 16 or 32 cards, 8 or 16 pairs, so score will be full when score will be equal to the amount of cards divided by 2
-        if (usr_score === (difficulty / 2)) {
+        // we have 18 or 36 cards, 9 or 18 pairs, so score will be full when score will be equal to the amount of cards divided by 2
+        if (usr_score === (1)) {
           save_score()
         }
     }

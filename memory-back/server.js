@@ -9,12 +9,23 @@ const cors = require('cors');
 const { json } = require('express');
 // start express which will be called with app.get 
 const app = express();
-const score_path = './scores.json';
+//const score_path = './scores.json';
+
+const score_18_path = './scores18.json';
+const score_36_path = './scores36.json';
 
 app.use(cors());
 // parsing json
 app.use(express.json());
 
+
+var score_board_18 = {
+    usr: [],
+}
+
+var score_board_36 = {
+    usr: [],
+}
 
 var score_board = {
     usr: [],
@@ -25,10 +36,26 @@ const scoreHandler = {
    // (psd = pseudo, tmr = timer, trs = tries, diff = difficulty)
 
     save_score: function writeScoreFile(psd, tmr, trs, diff, res) {
-        score_board.usr.push({pseudo: psd, timer: tmr, tries: trs});
-        console.log(score_board.usr);
-        var data = JSON.stringify(score);
-        fs.writeFileSync(score_path, data, {'flags': 'wx'}, (err) => {
+        var path = ""
+        if (diff == 18) {
+            score_board_18.usr.push({pseudo: psd, timer: tmr, tries: trs});
+            score_re = score_board_18;
+            path = score_18_path;
+            console.log("difficulty 18")
+            console.log(score_board_18.usr);
+            
+        }
+        else {
+            score_board_36.usr.push({pseudo: psd, timer: tmr, tries: trs});
+            score_re = score_board_36;
+            path = score_36_path;
+            console.log("difficulty 36")
+            console.log(score_board_36.usr);
+        }
+        var data = JSON.stringify(score_re);
+        console.log("var data : ")
+        console.log(data)
+        fs.writeFileSync(path, data, {'flags': 'wx'}, (err) => {
             if (err) {
                 throw err;
             }
@@ -39,7 +66,7 @@ const scoreHandler = {
         });
     },
 
-    read_score: function readScoreFile(res) {
+    read_score: function readScoreFile(score_path, res) {
         if (fs.existsSync(score_path)) {
             var data = fs.readFileSync(score_path);
             if (data) {
@@ -73,15 +100,24 @@ const scoreHandler = {
     // scores wont be erased
 
     init_server: function initServer() {
-        score = scoreHandler.read_score();
-        const ord_score = Object.keys(score).map(function (key) {
-            return score[key];
+        score_18 = scoreHandler.read_score(score_18_path);
+        score_36 = scoreHandler.read_score(score_36_path);
+
+        const ord_score_18 = Object.keys(score_18).map(function (key) {
+            return score_18[key];
         });
+        const ord_score_36 = Object.keys(score_36).map(function (key) {
+            return score_36[key];
+        });
+        scoreHandler.order_score(ord_score_18, score_board_18);
+        scoreHandler.order_score(ord_score_36, score_board_36);
+    },
+
+    order_score: function orderScore(ord_score, score_board) {
         for (const key in ord_score[0]) {
-            console.log(ord_score[0][key]);
             score_board.usr.push({pseudo: ord_score[0][key].pseudo, timer: ord_score[0][key].timer, tries: ord_score[0][key].tries});
         }
-    },
+    }
 }
 
 scoreHandler.init_server();

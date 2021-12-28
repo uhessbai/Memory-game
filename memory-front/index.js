@@ -12,12 +12,12 @@ function saveOptions () {
 
     // submit pseudo inside of textbox
     const name = document.getElementById('name').value;
-   // checking which radio is checked, if diff16 is not selected then it's the other one
-    if (document.getElementById('diff16').checked) {
-        difficulty = document.getElementById('diff16').value;
+   // checking which radio is checked, if diff18 is not selected then it's the other one
+    if (document.getElementById('diff18').checked) {
+        difficulty = document.getElementById('diff18').value;
       }
     else  {
-        difficulty = document.getElementById('diff32').value;
+        difficulty = document.getElementById('diff36').value;
       }
     // store pseudo for the session
     sessionStorage.setItem("NAME", name);
