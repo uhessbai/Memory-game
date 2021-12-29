@@ -21,9 +21,21 @@ body {
 
 }
 
+.timebar {
+  background-color: green;
+  margin-left: 1rem;
+}
+
+.timetitle {
+  margin-left: 1rem;
+}
+
+.progresstitle {
+  margin-left: 1rem;
+}
+
 .progressbar { 
   width: 5rem;
-  margin-top: 2rem;
   margin-left: 1rem;
 } 
 

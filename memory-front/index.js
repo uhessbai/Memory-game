@@ -13,7 +13,7 @@ scores_tab = []
 
 
 function displayScores() {
-        // Get function to display scores on main menu, 
+        // Get call to display scores on main menu, 
         $.ajax ({
             url: "http://0.0.0.0:8080/getscores",
             type: 'GET',

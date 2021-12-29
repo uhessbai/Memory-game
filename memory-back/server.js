@@ -1,3 +1,22 @@
+
+/*
+
+Here is the file where we will handle data and send it back to the client
+It will be stored in scores18.json and scores36.json
+values stored are : 
+    -pseudo
+    -timer
+    -tries
+You can see how it is stored in both previously mentioned files
+
+There is mainly 3 parts in this file : 
+    1 : setting values
+    2 : internal functions (in scorehandler)
+    3 : functions for communicating with cliend (GET and POST)
+*/
+
+
+
 // include http module to send request to frnt and include url in order to save score (we will read client url which will contain score and pseudo)
 const http = require('http');
 const url = require('url')
@@ -88,15 +107,19 @@ const scoreHandler = {
     // scores wont be erased
 
     init_server: function initServer() {
+        // read scores18.json and scors36.json
         score_18 = scoreHandler.read_score(score_18_path);
         score_36 = scoreHandler.read_score(score_36_path);
         // putting score in score_boards
+        // object.keys help us to find keys in data we readd from scores18.json and scores36.json
+        // map help us to create an object ordered and iterable
         const ord_score_18 = Object.keys(score_18).map(function (key) {
             return score_18[key];
         });
         const ord_score_36 = Object.keys(score_36).map(function (key) {
             return score_36[key];
         });
+        // now that we can make a loop, we push values in our local boards 
         for (const key in ord_score_18[0]) {
             score_board_18.usr.push({pseudo: ord_score_18[0][key].pseudo, timer: ord_score_18[0][key].timer, tries: ord_score_18[0][key].tries});
         }
@@ -105,13 +128,14 @@ const scoreHandler = {
         }
     },
 
-
+    // same principle here, we gather keys and then make it iterable
     order_score: function orderScore(score) {
         const ord_score = Object.keys(score).map(function (key) {
             console.log(score[key]);
             return score[key];
         });
         var parsed = [];
+        // sorting values by time
         var parsed = ord_score[0].sort((a, b) => {
             return a.timer - b.timer;
         });
@@ -123,7 +147,6 @@ scoreHandler.init_server();
 
 app.get("/getscores", (req, res) => {
      // gathering scores
-   // var score = []
     var ordened_score = []
     ordened_score[0] = scoreHandler.order_score(score_board_18);
     ordened_score[1] = scoreHandler.order_score(score_board_36);

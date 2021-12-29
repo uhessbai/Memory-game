@@ -216,6 +216,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // chrono variable
     var seconds = 0
     var tempo = []
+    // if lost == 1, score wont be saved because you lost
+    var lost = 0;
     
 
 // --- FUNCTIONS --- 
@@ -283,15 +285,18 @@ document.addEventListener('DOMContentLoaded', () => {
         cardsPicked = []
         cardsValues = []
         // we have 18 or 36 cards, 9 or 18 pairs, so score will be full when score will be equal to the amount of cards divided by 2
+        // -1 is because last pair is obvious, you can remove it to get a bit more of dopamine while playing
         if (usr_score === ((difficulty / 2) - 1) ) {
-          save_score()
+          if (lost != 1) {
+            save_score()
+          }
         }
     }
 
     function addingScore(idCard1, idCard2, cards) {
         cards[parseInt(idCard1)].setAttribute('src', 'assets/cardgg.png')
         cards[parseInt(idCard2)].setAttribute('src', 'assets/cardgg.png')
-        // dating and displaying score
+        // updating and displaying score
         usr_score += 1
         // actualizing progressbar by calculating percentage and inserting it  
         document.getElementById('progressbar').setAttribute('value', (Math.floor((usr_score / (difficulty / 2)) * 100)));
@@ -347,6 +352,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function chrono_loop() {
         seconds += 1;
         document.getElementById("seconds").innerHTML = (seconds + " s");
+        if (seconds >= difficulty * 7) {
+          alert('Time is over ! :( ')
+          // stopping time and putting lose condition to 1
+          clearInterval(tempo)
+          lost = 1;
+        } 
+        // to calculate time left, we substract the amount of time given to 100% of the bar so that bar will decrease
+        document.getElementById('timebar').setAttribute('value', (100 - (Math.floor((seconds / (difficulty * 5)) * 100))));
     }
 
 // --- LAUNCHING GAME --- 

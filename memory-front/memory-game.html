@@ -17,11 +17,20 @@
         <div id="score" class="infos">Score :</div>
         <div id="tries" class="infos">Tries :</div>
         <div id="seconds" class="infos">Time : </div>
-        <progress id="progressbar" class="progressbar" max="100" value="0"> </progress>
+        
         <div class="wrapper">
         <!-- This grid will store cards -->
         <div class="grid"> 
+
     </h2>
+    <!-- two progressbar, the first one to see the score, the second one for time left
+    values will be changed thanks to getelementbyid and setattribute-->
+    <div class="progresstitle">Progress :</div>
+    <progress id="progressbar" class="progressbar" max="100" value="0"> </progress>
+
+    <div class="timetitle">Time left : </div>
+    <progress id="timebar" class="timebar" max="100" value="100"> </progress>
+
 
 </body>
 
