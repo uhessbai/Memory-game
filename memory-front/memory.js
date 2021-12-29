@@ -333,7 +333,9 @@ document.addEventListener('DOMContentLoaded', () => {
         $.ajax({
           type: "POST",
           url: "http://127.0.0.1:8080/setscores",
+          // what you are sending to the server
           dataType: 'json',
+          // what you are expecting back
           contentType: "application/json",
           // converting datas to JSON format as we mentionned in dataType that it would be that way
           data: JSON.stringify(usr_data),
