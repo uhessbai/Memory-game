@@ -348,7 +348,6 @@ document.addEventListener('DOMContentLoaded', () => {
               console.log(error);
           },
         });
-  
     }
 
     function chrono_loop() {
