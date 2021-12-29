@@ -11,9 +11,9 @@ Steps to launch the project:
 
 
 Educational purposes : 
-    - Interractions between front and back end (GET and POST)
-    - Understanding how you do store and handle data
-    - Dynamic html
-    - Handling conditions (mainly through difficulty option (18 and 36 are significant numbers here))
-    - Using objects
-    - Keep a clean and simple code
+    - Interractions between front and back end (GET and POST)  
+    - Understanding how you do store and handle data  
+    - Dynamic html  
+    - Handling conditions (mainly through difficulty option (18 and 36 are significant numbers here))  
+    - Using objects  
+    - Keep a clean and simple code  
